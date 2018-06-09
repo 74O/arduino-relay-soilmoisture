@@ -29,7 +29,7 @@ int riego(int p) {
     //Configuramos valor minimo de humedad para activar riego
     int val = 20;
     //Configuramos tiempo de riego
-    int segundos = 10;
+    int segundos = 1;
     int milis = segundos * 1000;
     //Comprobamos si el porcentaje es superior u inferior
     if (p <= val) {
