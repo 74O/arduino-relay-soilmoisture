@@ -29,15 +29,17 @@ int riego(int p) {
     //Configuramos valor minimo de humedad para activar riego
     int val = 20;
     //Configuramos tiempo de riego
-    int segundos = 1;
+    int segundos = 3;
     int milis = segundos * 1000;
     //Comprobamos si el porcentaje es superior u inferior
     if (p <= val) {
         digitalWrite(releV, HIGH);
         delay(milis);
         digitalWrite(releV, LOW);
+        Serial.println("Hemos regado");
       } else {
         digitalWrite(releV, LOW);
+        Serial.print("No es necesario regar");
       }
 }
 
@@ -57,14 +59,14 @@ int humedad() {
 }
 
 
-int humedadSerial(){
+void humedadSerial(){
     Serial.print("Humidity Level (0-100%): ");
     Serial.print(humedad());// Llama a la funcion humedad desde el monitor serial
     Serial.println("%");
     
     // Llamamos a la funcion de riego y le pasamos el porcentaje de humedad
     riego(humedad());
-
+    Serial.println("Comando terminado");
 }
 
 
@@ -72,7 +74,7 @@ void loop() {
     if(Serial.available()) {
       char c = Serial.read();
       if (c == 'r') {
-        Serial.print(humedadSerial());
+        humedadSerial();
       }
     }
 }
